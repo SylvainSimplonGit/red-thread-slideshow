@@ -1,0 +1,172 @@
+{
+  "imdbRating": 7.7,
+  "imdbVote": 7807,
+  "posterUrl": "http://image.tmdb.org/t/p/original/uk3LfRdzTp8pyR8SigjUNvtx90E.jpg",
+  "genres": [{
+    "idGenre": 35,
+    "name": "Comédie"
+  }],
+  "idImdb": "tt0109440",
+  "plot": "Odile Deray, attachée de presse, vient au Festival de Cannes pour présenter le film \"Red is Dead\". Malheureusement, celui-ci est d'une telle faiblesse que personne ne souhaite en faire l'écho. Mais lorsque les projectionnistes du long-métrage en question meurent chacun leur tour dans d'étranges circonstances, \"Red is dead\" bénéficie d'une incroyable publicité. Serge Karamazov est alors chargé de protéger le nouveau projectionniste du film.",
+  "released": "1994-03-09",
+  "runtime": 99,
+  "title": "La Cité de la Peur",
+  "director": "Alain Berbérian",
+  "actors": [{
+      "idActor": 82119,
+      "name": "Chantal Lauby"
+    },
+    {
+      "idActor": 4275,
+      "name": "Alain Chabat"
+    },
+    {
+      "idActor": 27221,
+      "name": "Dominique Farrugia"
+    },
+    {
+      "idActor": 47337,
+      "name": "Gérard Darmon"
+    },
+    {
+      "idActor": 76826,
+      "name": "Sam Karmann"
+    },
+    {
+      "idActor": 19776,
+      "name": "Jean-Christophe Bouvet"
+    },
+    {
+      "idActor": 76827,
+      "name": "Hélène de Fougerolles"
+    },
+    {
+      "idActor": 2165,
+      "name": "Rosanna Arquette"
+    },
+    {
+      "idActor": 10698,
+      "name": "Tchéky Karyo"
+    },
+    {
+      "idActor": 28281,
+      "name": "Jean-Pierre Bacri"
+    },
+    {
+      "idActor": 24814,
+      "name": "Daniel Gélin"
+    },
+    {
+      "idActor": 30641,
+      "name": "Eddy Mitchell"
+    },
+    {
+      "idActor": 507238,
+      "name": "Pierre Lescure"
+    },
+    {
+      "idActor": 545426,
+      "name": "Patrick Lizana"
+    },
+    {
+      "idActor": 49748,
+      "name": "Eric Prat"
+    },
+    {
+      "idActor": 255923,
+      "name": "Marc de Jonge"
+    },
+    {
+      "idActor": 62531,
+      "name": "Valérie Lemercier"
+    },
+    {
+      "idActor": 572506,
+      "name": "Dave"
+    },
+    {
+      "idActor": 39144,
+      "name": "Patrice Laffont"
+    },
+    {
+      "idActor": 2414,
+      "name": "Artus de Penguern"
+    },
+    {
+      "idActor": 67717,
+      "name": "Michel Hazanavicius"
+    },
+    {
+      "idActor": 23508,
+      "name": "Daniel Toscan du Plantier"
+    },
+    {
+      "idActor": 2710,
+      "name": "James Cameron"
+    },
+    {
+      "idActor": 17624,
+      "name": "Olivier Doran"
+    },
+    {
+      "idActor": 310646,
+      "name": "Christian Gazio"
+    },
+    {
+      "idActor": 291375,
+      "name": "Florence Viala"
+    },
+    {
+      "idActor": 411483,
+      "name": "Philippe Chany"
+    },
+    {
+      "idActor": 278032,
+      "name": "Pierre Amzallag"
+    },
+    {
+      "idActor": 19063,
+      "name": "Bruno Carette"
+    },
+    {
+      "idActor": 572507,
+      "name": "Claire Hammond"
+    },
+    {
+      "idActor": 572508,
+      "name": "Christian Moro"
+    },
+    {
+      "idActor": 572509,
+      "name": "Florence Joubert"
+    },
+    {
+      "idActor": 264214,
+      "name": "Hélène Rodier"
+    },
+    {
+      "idActor": 572510,
+      "name": "Géraldine Bonnet-Guérin"
+    },
+    {
+      "idActor": 78480,
+      "name": "Sophie Mounicot"
+    },
+    {
+      "idActor": 70165,
+      "name": "Gérard Lanvin"
+    },
+    {
+      "idActor": 21680,
+      "name": "Dominique Besnehard"
+    },
+    {
+      "idActor": 415820,
+      "name": "Pierre Héros"
+    },
+    {
+      "idActor": 572511,
+      "name": "Henri de Turenne"
+    }
+  ]
+}

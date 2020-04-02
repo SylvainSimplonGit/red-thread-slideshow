@@ -1,0 +1,184 @@
+<!-- ALL SLIDES OF A CHAPTER GO HERE -->
+<!-- Each section element contains an individual slide -->
+
+<!-- 
+  To add a resource :
+  1- add it in slideshow/resources folder depending on the file type
+  2- modify src attributes so that the link points to the right folder
+-->
+<section data-timing="8">
+  <h1>Génèse</h1>
+
+  <aside class="notes">
+    Notre groupe de 3 apprenants s'est formé autour de l'idée <strong>Films & Séries</strong>(O)
+  </aside>
+</section>
+<section data-timing="15">
+  <h2>Identification des besoins</h2>
+  <h3 class="fragment">Comment se voir proposer<br>une vidéo qui nous plairait ?</h3>
+  <h3 class="fragment"><strong>Comment proposer une liste de films<br>adaptée au gout cinématographique ?</strong></h3>
+  <aside class="notes">
+    Notre besoin était : (O)<br>
+    "Comment se voir proposer une vidéo qui nous plairait ?"<br>
+    Nous avons donc travailler sur la question suivante : (O)<br>
+    "Comment proposer une liste de films adaptée au gout cinématographique ?" (O)
+  </aside>
+</section>
+
+<section data-timing="30">
+  <h2>Nos Questions ?</h2>
+  <ul>
+    <li class="fragment">Qu'est-ce qu'un film ?</li>
+    <li class="fragment">Qu'est-ce qu'un cinéphile ?</li>
+    <li class="fragment">Comment classer un film ?</li>
+    <li class="fragment">Qu'est-ce qu'un goût cinématographique ?</li>
+    <li class="fragment">Comment ajouter des films dans la liste de référence des vidéos ?</li>
+    <li class="fragment">Où trouver les infos d'un film ?</li>
+    <li class="fragment">...</li>
+  </ul>
+  <aside class="notes">
+    Pour concrétiser le besoin, nous nous sommes poser d'autres questions plus
+    précises (O)<br>
+    <ul>
+      <li>Qu'est-ce qu'un film ? (O)</li>
+      <li>Qu'est-ce qu'un cinéphile ? (O)</li>
+      <li>Comment classer un film ?</li>
+      <i>Un questionnaire a d'ailleurs été envoyé au groupe pour avoir leur avis</i> (O)
+      <li>Qu'est-ce qu'un goût cinématographique ? (O)</li>
+      <li>Comment ajouter des films dans la liste de référence des vidéos ? (O)</li>
+      <li>Où trouver les infos d'un film ? (O)</li>
+      <li>Et plein d'autres questions</li>
+    </ul>
+    Et pour y répondre, nous avons fait des recherches. (O)
+  </aside>
+</section>
+
+<section data-timing="5">
+  <h2>Une recherche</h2>
+  <span class="fragment">Comment identifier un film ?</span>
+  <aside class="notes">
+    Je vais vous détailler un exemple de recherche (O)<br>
+    <strong>Comment identifier un film ?</strong> (O)
+  </aside>
+</section>
+
+<section data-timing="15">
+  <h2>Identification d'un film</h2>
+  <img class="fragment" src="./slideshow/resources/images/identical_title.png" alt="Titre de film identique">
+
+  <aside class="notes">
+    Pour identifier un film, nous nous sommes rendu compte<br>
+    que le titre ne suffisait pas. (O)<br><br>
+    Ici on peut voir 2 affiches de films ayant le même titre "LIFE"<br>
+    et il en existe d'autres.<br><br>
+    Il fallait donc trouver une <strong>donnée</strong> liée au film
+    qui l'identifierait à coup sûr. (O)<br>
+  </aside>
+</section>
+
+<section data-timing="25">
+  <h2>Solutions trouvées</h2>
+  <ul>
+    <li class="fragment">le n° ISAN</li>
+    <li class="fragment">le code IMDB</li>
+  </ul>
+  <aside class="notes">
+    Les solution que nous avons pu trouver, c'est (O)<br><br>
+    <strong>Le n° ISAN</strong> pour International Standard Audiovisual Number <br>
+    qui est un numéro unique, <br>
+    universel et permanent d'immatriculation <br>
+    des œuvres audiovisuelles. (O)<br><br>
+    <strong>Le code IMDB</strong> pour Internet Movie Database qui est une base <br>
+    de données en ligne sur le cinéma mondial, sur la télévision, <br>
+    et plus secondairement les jeux vidéo. (O)
+  </aside>
+</section>
+
+<section data-timing="10">
+  <h2>Un autre exemple</h2>
+  <span class="fragment">Où trouver les informations d'un film ?</span>
+
+  <aside class="notes">
+    Un autre exemple de recherche (O)<br><br>
+    Pour être efficace, il fallait trouver une API qui propose un grand
+    nombre d'informations en ligne. (O)
+  </aside>
+</section>
+
+<section data-timing="15">
+  <h2>Allociné</h2>
+  <div style="position: relative">
+    <img src="./slideshow/resources/images/Allocine_Logo.svg" alt="Logo Allociné.fr">
+    <img class="fragment imgPosition" id="redCross" src="./slideshow/resources/images/red_cross.svg" />
+  </div>
+  <aside class="notes">
+    Le site d'Allociné.fr possède apparemment une API mais impossible
+    de trouver comment obtenir une clé.<br><br>
+    et le scrapping des pages engendrerait trop de travail. (O)<br><br>
+    Donc trop compliqué... (O)
+  </aside>
+</section>
+
+<section data-timing="15">
+  <h2>The Open Movie Database</h2>
+  <img class="logo50" src="./slideshow/resources/images/API-OMDB.png" alt="The OPEN Movie Database API">
+  <img class="fragment imgPosition" id="jsonAPI" src="./slideshow/resources/images/omdb-json.png" />
+  <aside class="notes">
+    The Open Movie Database contient beaucoup d'informations intérressantes comme :
+    <ul>
+      <li>le Titre <i>évidemment</i></li>
+      <li>le synopsis</li>
+      <li>le "IMDB Rating"</li>
+      <li>le "IMDB votes"</li>
+    </ul>
+    (O)<br>
+    Mais elle sont toutes en Anglais<br>
+    Difficile de traduire, dans l'application, un synopsis pour des utilisateurs français. (O)
+  </aside>
+</section>
+
+<section data-timing="20">
+  <h2>The Movie Database</h2>
+  <img class="logo50" src="./slideshow/resources/images/API-TMDB.png" alt="The Movie Database API">
+  <img class="fragment imgPosition" id="jsonAPI" src="./slideshow/resources/images/tmdb-json.png" />
+  <aside class="notes">
+    The Movie Database contient des informations en plusieurs langues<br>
+    (FR, EN, DE, ...)<br>
+    L'API est bien plus complète<br>
+    Et surtout l'API est sans restrictions<br>(O)<br>
+    Cerise sur le gâteau, l'API se base sur le n° IMDB<br>
+    qui identifie la grande majorité des films.<br>
+    Mais, il lui manquent des données interressantes comme les votes et notes IMDB.(O)
+  </aside>
+</section>
+
+<section data-timing="15">
+  <h2>La solution</h2>
+  <span class="fragment">Récupérer les informations grâce au</span>
+  <span class="fragment"><strong>n° IMDB</strong></span>
+  <span class="fragment">sur 2 API :</span>
+  <ul>
+    <li class="fragment"><strong>The Movie Database</strong>
+      <ul>
+        <li>le titre</li>
+        <li>l'affiche</li>
+        <li>...</li>
+      </ul>
+    </li>
+    <li class="fragment"><strong>Open Movie Database</strong>
+      <ul>
+        <li>le "IMDB Rating"</li>
+        <li>le "IMDB votes"</li>
+      </ul>
+    </li>
+  </ul>
+  <aside class="notes">
+    La solution (O)<br><br>
+    Récupérer grâce (O)<br>
+    au n° IMDB Standard,(O)<br><br>
+    les informations liées à la langue, (O)<br>
+    sur <strong>The Movie Database</strong><br><br>
+    les informations qui manquent (O)<br>
+    sur <strong>Open Movie Database</strong> (O)
+  </aside>
+</section>

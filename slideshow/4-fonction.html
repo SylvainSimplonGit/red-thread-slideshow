@@ -1,0 +1,518 @@
+<!-- ALL SLIDES OF A CHAPTER GO HERE -->
+<!-- Each section element contains an individual slide -->
+
+<!-- 
+  To add a resource :
+  1- add it in slideshow/resources folder depending on the file type
+  2- modify src attributes so that the link points to the right folder
+-->
+<section data-timing="8">
+  <h1>L'ajout de film</h1>
+
+  <aside class="notes">
+    La fonctionnalité, que j'ai choisi de vous présenter en détail,
+    est celle sur laquelle j'ai présenté l'architecture séquentielle :<br>
+    <strong>l'Ajout d'un film</strong>
+  </aside>
+</section>
+<section data-timing="5">
+  <h2>Présentation<br>de<br>Moviestack</h2>
+
+  <aside class="notes">
+    Tout d'abord la présentation de l'application.
+  </aside>
+</section>
+<section data-timing="240">
+  <!-- <h2>Présentation</h2> -->
+  <video class="bordering" data-autoplay muted="true" width="700"
+    src="./slideshow/resources/videos/ALL-2020-03-30_12-29-16_NV12.mp4"
+    type='video/mp4; codecs="avc1.4d002a, mp4a.40.2"'></video>
+  <aside class="notes">
+    Le changement d'utilisateur se fait via une liste de choix, on peut voir le changement de nom<br>
+    En cliquant sur le bouton ma liste, on accéde à la page qui liste tous les films de l'utilisateur.<br>
+    En cliquant sur l'icone symbolisant une loupe, on accéde à la page des informations du film.<br>
+    Sur cette page on peut voir les différentes informations du film récupérées via les API externes<br>
+    On peut voir le n° IMDB qui nous sert de clé primaires pour les object Movie<br>
+    Les étoiles de droite correspondent à la moyenne des votes dans notre application<br>
+    En cliquant sur ces étoiles, on peut voir la liste des opinions postés par les utilisateurs de l'applicaiton.<br>
+    On peut voir ici que l'on en a qu'un avis<br>
+    Les étoiles de gauche correspondent à la note de l'utilisateur courant.<br>
+    En cliquant dessus, on accéde à une boite de dialogue qui permet de déposer ou modifier l'avis
+    que l'utilisateur a sur ce film<br>
+    La sauvegarde de l'avis va modifier les niveaux des deux notes<br>
+    On peut voir que le nouvel avis a bien été enregistré dans la liste des opinions globales.<br>
+    Un clic sur la fleche, nous ramène à la liste de film de l'utilisateur<br>
+    En cliquant sur le bouton, nous accédons à la page d'ajout d'un film pour l'utilisateur.<br>
+    Dans le champ prévu, on renseigne un mot clé de recherche<br>
+    Dans ce cas, aucun titre de film n'est repertorié dans la base de The Movie Database<br>
+    En mettant un second choix de titre puis on recherche.<br>
+    On voit que du texte apparait nous indiquant que la recherche est en cours<br>
+    Le tableau avec les films trouvés ayant THOR dans le titre apparait<br>
+    En cliquant sur le + à gauche du titre, on ajout le film à notre liste de film<br>
+    C'est cette fonctionnalité que je vous présenterait en détail.<br>
+    Les informations ont bien été récupérées depuis les API externes<br>
+    En changeant d'utilisateur, on peut voir que la liste de films change.<br>
+    Elle est bien liée à l'utilisateur<br>
+    On peut trier la liste
+    (O)
+  </aside>
+</section>
+<section section data-timing="5">
+  <h2>Conception</h2>
+  <aside class="notes">
+    Pour commencer, il a fallut imaginer les objets que nous <strong>allions</strong> utiliser (O)
+  </aside>
+</section>
+<section section data-timing="30" data-markdown="./slideshow/resources/diagrams/mcd.md" data-separator="^\n\n\n"
+  data-separator-vertical="^\n\n" data-separator-notes="^Note:" data-charset="utf-8">
+  <!--
+        Note that Windows uses `\r\n` instead of `\n` as its linefeed character.
+        For a regex that supports all operating systems, use `\r?\n` instead of `\n`.
+    -->
+</section>
+
+<section data-timing="50">
+  <h3>L'évènement</h3>
+  <p class="labelFile">add-amovie-page <span class="codeLocation">(Front)</p>
+  <pre><code class="hljs html"  data-trim data-noescape>
+    &lt;mat-icon ... (click)="addAMovie(movie)"&gt;add&lt;/mat-icon&gt;</code></pre>
+
+  <pre class="fragment"><code class="hljs typescript" data-trim data-noescape data-line-numbers="2, 5-7, 9-10">
+    constructor(
+      private movieService: MovieService
+    ) {
+    ...
+    addAMovie(movie: Movie) {
+      this.movieService.getMovieFromTMDBById(movie.idImdb)
+      .subscribe(movieRefreshed => {
+        ...
+      });
+    }</code></pre>
+
+  <aside class="notes">
+    Dans le composant add-amovie-page<br>
+    La méthode <strong>addAMovie()</strong> est exécuter lors du clic sur le bouton "+"
+    à gauche d'un film dans la liste des films trouvés via un mot clé sur TMDB.<br>(O)<br>
+    Cette méthode qui prend comme argument l'objet movie de type Movie<br>
+    va utiliser l'Observable <strong>getMovieFromTMDBById</strong> pour créer un observateur movieRefreshed
+    via la méthode subscribe.<br>
+    Le code à l'intérieur de la méthode subscribe sera exécuté dés que des données de
+    l'Observable <strong>getMovieFromTMDBByImdbID</strong> seront disponibles.<br>
+    L'observateur movieRefreshed aura comme valeur ces données disponibles au fil du temps.<br>
+    C'est ce que l'on appelle la programmation réactive.
+    (O)
+    <br>
+    <ul>
+      <li><a href="https://makina-corpus.com/blog/metier/2017/premiers-pas-avec-rxjs-dans-angular">Premier pas avec RXJS
+          dans Angular</a></li>
+      <li><a href="https://www.learn-angular.fr/comprendre-rxjs" />Comprendre RXJS</a></li>
+    </ul>
+  </aside>
+</section>
+
+<section data-timing="85">
+  <h3>Le routing</h3>
+  <p class="labelFile">movie.service <span class="codeLocation">(Front)</span></p>
+  <pre><code class="hljs typescript" data-trim data-noescape data-line-numbers="2,4-6">
+    constructor(
+      private httpClient: HttpClient,
+    ) {  }
+    getMovieFromTMDBById(idImdb: string): Observable<Movie> {
+      const urlApi = this.pathRootApi + 'movies/' + idImdb + '/tmdb';
+      return this.httpClient.get<Movie>(urlApi);
+    }</code></pre>
+  <p class="labelFile">MovieController <span class="codeLocation">(Back)</span></p>
+  <pre><code class="hljs java" data-trim data-noescape data-line-numbers="1-3,5-6">
+    @RestController
+    @RequestMapping("/api/movies")
+    public class MovieControler {
+      ...
+      @GetMapping("/{movieId}/tmdb")
+      public Object getMovieFromTmdbByImdbId(@PathVariable String movieId) {</code></pre>
+  <aside class="notes">
+    l'Observable <strong>getMovieFromTMDBByImdbID</strong> appelé précédemment retournera
+    l'Observable httpClient.<br><br>
+    Gràce à l'injection de dépendances, lors de l'instanciation de l'objet
+    movieService dans le composant add-amovie-page, une instance de httpClient
+    sera créer via le constructeur de movieService<br>
+    ce qui permettra d'utiliser la Class HttpClient et ces méthodes dans ce service.
+    <br><br>
+    Coté Backend :<br>
+    Dans Spring, Les annotations sont prévues pour simplifier la mise en oeuvre du code.
+    Ici L'annotation <strong>@RestController</strong> indique à Spring que la class qui suit sera un
+    REST Web Services (c'est la combinaison des annotations <strong>@Controller</strong> et
+    <strong>@ResponseBody</strong>).<br>
+    Elle indique que chaque URL reçue avec la racine <strong>/api/movies</strong> sera interpretée par
+    le code suivant.<br>
+    L'annotation <strong>@GetMapping</strong> indique que la méthode suivante sera exécuter si l'url
+    est de type <strong>/api/movies/movieId/tmdb</strong> avec movieID qui sera récupérée comme une variable
+    via l'annotation <strong>@PathVariable</strong>. (O)
+    <br><br>
+    <ul>
+      <li><a href="https://angular.io/guide/http#reading-the-full-response">Reading the full response</a></li>
+      <li><a href="http://patatos.over-blog.com/2014/07/l-injection-de-dependance-pour-les-nuls.html">L'injection de
+          dépendance pour les nuls</a></li>
+      <li><a href="https://www.baeldung.com/spring-controller-vs-restcontroller">Spring Controller vs RestController</a>
+      </li>
+      <li><a href="https://www.codeflow.site/fr/article/spring-controller-vs-restcontroller">Spring Controller vs
+          RestController 2 </a></li>
+    </ul>
+  </aside>
+</section>
+
+<section data-timing="50">
+  <h3>Le service</h3>
+  <p class="labelFile">MovieController <span class="codeLocation">(Back)</span></p>
+  <pre><code class="hljs java" data-trim data-noescape data-line-numbers="3,6">
+    public Object getMovieFromTmdbByImdbId(@PathVariable String movieId) {
+      try {
+        return movieService.getMovieFromTMDBByImdbID(Integer.parseInt(movieId), true);
+      } catch (NumberFormatException e) {
+        try {
+          return movieService.getMovieFromTMDBByImdbID(movieId, true);
+        ...</code></pre>
+  <p class="labelFile">MovieService <span class="codeLocation">(Back)</span></p>
+  <pre><code class="hljs java" data-trim data-noescape data-line-numbers="1-3, 5">
+    @Service
+    public interface MovieService {
+      Movie getMovieFromTMDBByImdbID(String imdbId, boolean save) 
+        throws JsonProcessingException, InvalidMovieTMDBException;
+      Movie getMovieFromTMDBByImdbID(Integer tmdbId, boolean save) 
+        throws JsonProcessingException, InvalidMovieTMDBException;</code></pre>
+  <aside class="notes">
+    L'annotation <strong>@Service</strong> précise que l'interface qui suit sera un Service.<br>
+    Comme on a pu le voir, la méthode <strong>getMovieFromTmdbByImdbId</strong> du controleur
+    est appelé en fonction de l'URL.<br>
+    Une fois appelé, cette méthode appelle une méthode du service movieService
+    <strong>getMovieFromTMDBByImdbID</strong>.<br>
+    Cette méthode a été déclarée avec 2 défintions pour permettre sa surcharge.<br>
+    <ul>
+      <li>Une déclaration avec pour argument une Chaine </li>
+      <li>et une autre avec un Entier.</li>
+    </ul>
+    Ceci pour pouvoir appeler cette méthode, avec comme argument 'tt1234567',
+    qui est un identifiant IMDB, ou avec comme argument '12345' qui est un ID de
+    The Movie Database (O)
+    <br>
+    <ul>
+      <li><a href="https://www.baeldung.com/spring-component-repository-service">spring-component-repository-service</a>
+      </li>
+      <li><a href="https://www.commentcamarche.net/contents/555-java-les-methodes">555-java-les-methodes</a></li>
+    </ul>
+  </aside>
+</section>
+
+<section data-timing="25">
+  <h2>L'interface MovieService</h2>
+  <p class="labelFile">MovieService <span class="codeLocation">(Back)</span></p>
+  <pre><code class="hljs java" data-trim data-noescape data-line-numbers="1-3, 5">
+    @Service
+    public interface MovieService {
+      Movie getMovieFromTMDBByImdbID(Integer tmdbId, boolean save) 
+        throws JsonProcessingException, InvalidMovieTMDBException;</code></pre>
+  <p class="labelFile">MovieServiceImpl <span class="codeLocation">(Back)</span></p>
+  <pre><code class="hljs java" data-trim data-noescape data-line-numbers="1-2, 4-5, 7, 10-11, 13-14">
+    @Service
+    public class MovieServiceImpl implements MovieService {
+      @Override
+      public Movie getMovieFromTMDBByImdbID(Integer tmdbId, boolean save) 
+        throws InvalidMovieTMDBException {
+        String imdbId = tmdbId.toString();
+        return this.getMovieFormTMDB(imdbId, save);
+      }</code></pre>
+  <aside class="notes">
+    Voici l'implémentation de l'interface MovieService<br>
+    L'annotation <strong>@Service</strong> précise que l'interface qui suit sera un Service. <br>
+    L'intérêt d'une interface :<br>
+    c'est une classe abstraite qui force la classe ou le service dans notre cas
+    a implémenté TOUTES les méthodes que l'interface a définit.
+    <br><br>
+
+    L'annotation <strong>@Override</strong> va permettre de redéfinir, ou d'implémenter, la méthode
+    de la class parente, dans notre cas l'interface.
+    <!-- Dans mes recherches, certains disent que mettre une annotation @Override lorsqu'on
+    impléménte une interface n'est pas utile mais cela prévient les erreurs lors de 
+    la compilation si la méthode est mal déclarer. De toute façon depuis la v6 de java
+    c'est obligatoire. -->
+    (O)
+    <br>
+    <ul>
+      <li><a href="http://blog.paumard.org/cours/java/chap07-heritage-interface-interface.html#d0e6767">Héritage de
+          classe</a></li>
+      <li><a
+          href="https://www.developpez.net/forums/d345476/java/general-java/langage/definition-exacte-override/">Override</a>
+      </li>
+    </ul>
+  </aside>
+</section>
+
+<section data-timing="45">
+  <h2>Requête sur l'API externe</h2>
+  <p class="labelFile">MovieServiceImpl <span class="codeLocation">(Back)</span></p>
+  <pre><code class="hljs java" data-trim data-noescape data-line-numbers="">
+    private RestTemplate restTemplate;
+    public MovieServiceImpl(
+      RestTemplateBuilder restTemplateBuilder
+    ) {
+      this.restTemplate = restTemplateBuilder.build();
+    }
+      private Movie getMovieFormTMDB(String imdbId, boolean save) 
+        throws InvalidMovieTMDBException {
+        this.args.put("Id", imdbId);
+        try {
+          String movieImdb = this.restTemplate.getForObject(
+              "https://api.themoviedb.org/3/movie/{Id}?api_key={key}&language={lang}",
+              String.class,
+              this.args
+          );
+  </code></pre>
+  <aside class="notes">
+    Grâce à la méthode <strong>getForObject</strong> de la Class <strong>RestTemplate</strong>,
+    il est possible de récupérer le retour d'une URL.<br>
+    La méthode <strong>getMovieFromTMDBByImdbID</strong> via la méthode <strong>getMovieFormTMDB</strong>
+    a besoin de récupérer la réponse de l'API externe de The Movie Database.<br>
+    La méthode <strong>getForObject</strong> permet de récupérer le retour de l'API
+    en spécidfiant la class de l'Object retourné, ici un type String.<br>
+    Si nous avions créé un object avec les mêmes attributs que celui retourné par
+    l'API externe, nous aurions pu le préciser dans le <strong>getForObject</strong>. (O)
+
+    <!-- J'aurais pu utiliser la méthode getForEntity qui m'aurait permis de pouvoir 
+    récupérer un Object ResponseEntity qui m'aurait fourni le code Status de la requête. -->
+
+    <br>
+    <ul>
+      <li><a
+          href="https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html#getForObject-java.lang.String-java.lang.Class-java.lang.Object...-">getForObject</a>
+      </li>
+    </ul>
+
+  </aside>
+</section>
+
+<section data-timing="5">
+  <h2>Déserialisation de la réponse</h2>
+  <p class="labelFile">MovieServiceImpl <span class="codeLocation">(Back)</span></p>
+  <pre><code class="hljs java" data-trim data-noescape data-line-numbers="1,6-7,9-10,13">
+    static final String TMDB_FIELD_IDIMDB = "imdb_id";
+    private Movie getMovieFormTMDB(String imdbId, boolean save)
+      throws InvalidMovieTMDBException {
+      ...
+      if (movieImdb != null) {
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode jsonMovie = mapper.readTree(movieImdb);
+        if (checkIdAndTitle(jsonMovie)) {
+          Movie newMovie = new Movie(
+            jsonMovie.get(TMDB_FIELD_IDIMDB).asText(),
+            jsonMovie.get(TMDB_FIELD_TITLE).asText());
+          ...
+  </code></pre>
+
+  <aside class="notes">
+    La déserialisation consiste à extraire les données d'un flux (ici une chaine JSON)
+    et les convertir dans un format utile à l'application (ici un Object de class JsonNode).
+    <br><br>
+    Ceci nous permet de pouvoir récupérer via la méthode get() de la class JsonNode
+    un Node bien précis et par la méthode asText() d'en récupérer sa valeur <br>
+    Cette information étant l'ID du nouvel objet Movie. (O)
+    <ul>
+      <li><a href="https://www.baeldung.com/jackson-object-mapper-tutorial">jackson-object-mapper-tutorial</a></li>
+      <li><a
+          href="https://fasterxml.github.io/jackson-databind/javadoc/2.7/com/fasterxml/jackson/databind/ObjectMapper.html#readTree(java.lang.String)">readTree</a>
+      </li>
+    </ul>
+
+
+  </aside>
+</section>
+
+<section data-timing="20">
+  <h2>Instanciation du Movie</h2>
+  <p class="labelFile">MovieServiceImpl <span class="codeLocation">(Back)</span></p>
+  <pre><code class="hljs java" data-trim data-noescape data-line-numbers="1,7-10,12">
+    import co.simplon.moviestack.model.Movie;
+    @Service
+    public class MovieServiceImpl implements MovieService {
+      private Movie getMovieFormTMDB(String imdbId, boolean save)
+        throws InvalidMovieTMDBException {
+            ...
+            Movie newMovie = new Movie(
+              jsonMovie.get(TMDB_FIELD_IDIMDB).asText(),
+              jsonMovie.get(TMDB_FIELD_TITLE).asText()
+            );
+            ...
+            movieRepository.save(newMovie);
+            ...
+  </code></pre>
+
+  <aside class="notes">
+    L'instanciation d'un nouvel objet Movie peut se faire grâce à l'import
+    de la Class Movie et du fait qu'elle est été déclarée public.<br>
+    Grâce à la ligne 12, il est possible de sauvegarder ce nouvel Object newMovie
+    dans la base de données via le Repository que nous verrons plus tard. (O)
+    <br>
+    <ul>
+      <li><a href="https://www.jmdoudoux.fr/java/dej/chap-poo.htm">POO</a></li>
+      <li><a href="http://blog.paumard.org/cours/java/chap04-structure-classe-instanciation.html">Instanciation</a></li>
+    </ul>
+  </aside>
+</section>
+
+<section data-timing="50">
+  <h2>L'Entité Movie</h2>
+  <p class="labelFile">Movie <span class="codeLocation">(Back)</span></p>
+  <pre><code class="hljs java" data-trim data-noescape data-line-numbers="">
+    @Entity
+    @Table(name="mv_movie")
+    public class Movie {
+      @Id  @Column(nullable = false, length = 10) @NotNull
+      private String idImdb;
+
+      @Column(nullable = false) @NotNull
+      private String title;
+      ...
+      public Movie() {}
+
+      public Movie(String idImdbMovie, String title) {
+          this.idImdb = idImdbMovie;
+          this.title = title;
+      }</code></pre>
+  <aside class="notes">
+    Le lien avec la base de données est facilité dans la déclaration de l'object Movie
+    via les annotations :<br>
+    <strong>@Entity</strong> nous indique que la classe Movie est une entité JPA (classe
+    persistante).<br>
+    <strong>@Table</strong> permet de fixer le nom de la table dans laquelle les instances
+    de cette classe vont être écrites.<br>
+    <strong>@Id</strong> définit quel attribut sera lié à la clé primaire de la table mv_movie<br>
+    <strong>@Column</strong> définit que l'attibut qu'il annote sera lié à un champ de la table<br>
+    <strong>@NotNull</strong> précise que l'attribut ne peut avoir la valeur NULL.<br>
+    Cette validation est faite côté JPA et pas côté SQL
+    <br><br>
+    Lors de l'instanciation d'un Object Movie, le constructeur valide les types des
+    arguments passés (ici des String) et affecte leur valeur aux attributs du
+    nouvel Object Movie. (O)
+    <br>
+    <ul>
+      <li><a href="http://blog.paumard.org/cours/jpa/chap03-entite-entite.html">Entity</a></li>
+      <li><a href="https://www.baeldung.com/hibernate-notnull-vs-nullable">NotNull vs Nullable</a></li>
+    </ul>
+  </aside>
+</section>
+
+<section data-timing="35">
+  <h2>Sauvegarde du Movie</h2>
+  <p class="labelFile">MovieServiceImpl <span class="codeLocation">(Back)</span></p>
+  <pre><code class="hljs java" data-trim data-noescape data-line-numbers="1,3, 5,10">
+    private MovieRepository movieRepository;
+    public MovieServiceImpl(
+      MovieRepository movieRepository,
+    ) {
+      this.movieRepository = movieRepository;
+    }
+    private Movie getMovieFormTMDB(String imdbId, boolean save)
+      throws InvalidMovieTMDBException {
+          ...
+          movieRepository.save(newMovie);
+          ...
+  </code></pre>
+  <p class="labelFile">MovieRepository <span class="codeLocation">(Back)</span></p>
+  <pre><code class="hljs java" data-trim data-noescape data-line-numbers="1">
+    public interface MovieRepository extends JpaRepository<Movie, String> {
+    }</code></pre>
+  <aside class="notes">
+    Le fait de déclarer une Interface <strong>MovieRepository</strong> qui est un héritage de
+    l'Interface <strong>JpaRepository</strong>, via le mot clé extends, me permet de pouvoir utiliser
+    dans l'Interface <strong>MovieRepository</strong>, les méthodes de l'Interface <strong>JpaRepository</strong> et de
+    ces Interfaces parentes, <br>(vu que l'Interface <strong>JpaRepository</strong> hérite elle même
+    de l'Interface <strong>CrudRepository</strong>).<br><br>
+    Je peux donc utiliser la méthode save() de l'Interface <strong>CrudRepository</strong>.<br>
+    Cette méthode save(), sauvegardera en base, l'object newMovie, pour la
+    persistence des données (O)
+    <br>
+    <ul>
+      <li><a
+          href="https://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/JpaRepository.html">JpaRepository</a>
+      </li>
+      <li><a href="https://i.stack.imgur.com/ee7XF.jpg">??</a></li>
+    </ul>
+  </aside>
+</section>
+
+<section data-timing="35">
+  <h2>Gestion des erreurs</h2>
+  <p class="labelFile">MovieServiceImpl <span class="codeLocation">(Back)</span></p>
+  <pre><code class="hljs java" data-trim data-noescape data-line-numbers="">
+    private void errorManagement(Exception e, String method) 
+      throws InvalidMovieTMDBException {
+        if (e instanceof ResourceAccessException) {
+          ...
+        } else if (e instanceof HttpClientErrorException) {
+          LOGGER.error(ERROR_HTTP, method, e.getMessage());
+          if (e.getMessage().contains("404")) {
+            throw new InvalidMovieTMDBException(
+              "The resource you requested could not be found.");
+          }
+        ...
+    }
+  </code></pre>
+  <pre><code class="hljs java" data-trim data-noescape data-line-numbers="1,3-5">
+    try {
+      ...
+    } catch (Exception e) {
+      this.errorManagement(e, methodName());
+    }
+    </code></pre>
+  <aside class="notes">
+    La gestion des Exception a été factorisé via la méthode errorManagement().<br>
+    En fonction des Exception reçues, cette méthode loggue sur la console
+    des messages différents, et renvoie, ou pas, une Exception.<br>
+    Ici seule l'Exception <strong>InvalidMovieTMDBException</strong> est retournée.<br>
+    Dans chaque méthode où la gestion des Exceptions doit être utilisé, il
+    suffit d'ajouter le code situé en bas, pour catcher l'Exception.<br>
+    La méthode methodName() récupère le nom de la méthode où l'<strong>Exception</strong> est
+    levée, pour pourvoir l'afficher dans le Logger, facilitant la maintenance. (O)
+  </aside>
+</section>
+
+<section data-timing="8">
+  <h2>Présentation du jeu d’essai</h2>
+  <h3>Ajout d'un Film via les API externes</h3>
+  <span class="legend">les tests ont été réalisés depuis le Swagger.</span>
+
+  <aside class="notes">
+    Je vais vous présenter une vidéo réalisée pour vous montrer les tests
+    effectués sur l'ajout d'un film
+  </aside>
+</section>
+
+<section data-timing="290">
+  <!-- <h2>Présentation</h2> -->
+  <video class="bordering" data-autoplay muted="true" width="600"
+    src="./slideshow/resources/videos/TST-2020-04-01_08-17-35_NV12.mp4"
+    type='video/mp4; codecs="avc1.4d002a, mp4a.40.2"'></video>
+  <aside class="notes">
+    Les tests ont été réalisés par le swagger intégré à l'application.<br>
+    Les 1er tests efectués seront les tests avec des données d'entrées
+    non conformes. <br>
+    La réponse devra être "<strong>The resource you requested could not be found</strong>."<br>
+    Ce message a été défini dans la gestion des erreurs précédemment présenté<br>
+    <br>
+    Voici comment j'ai construit la réponse conforme<br>
+    J'ai récupéré manuellemnt via les différentes API les informations
+    que mon code doit récupérer.<br>
+    Tout d'abord le film, pour le Titre, le Synopsis, ..<br>
+    Ensuite les Acteurs et le Réalisateur via une autre URL<br>
+    Puis le Poster sur une autre URL<br>
+    et enfin l'imdbRating et imdbVote sur l'API de Open Movie DataBase<br>
+    Ensuite, j'ai utilisé un outil de comparaison de structure JSON nommé JSON Diff<br>
+    à gauche, le retour de mon API via le swagger<br>
+    à droite, le résultat que je dois obtenir<br>
+    Je teste sur une données valide<br>
+    Je copie colle le résultat<br>
+    puis je compare<br>
+    Le résultat est conforme<br>
+    2nd test avec un id connu de TMDB de type Integer<br>
+    (O)
+
+  </aside>
+</section>

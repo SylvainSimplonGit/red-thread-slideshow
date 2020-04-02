@@ -1,0 +1,171 @@
+body {
+  background-image: url(../resources/images/clapperboard.svg), url(../resources/images/picto_simplon.png);
+  background-position: 3% 3%, 96% 3%;
+  background-repeat: no-repeat, no-repeat;
+  background-size: 8%, 10%;
+}
+
+strong {
+  color: #ed1450;
+  font-weight: bold;
+}
+
+.side-by-side {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  /* justify-content: space-around; */
+}
+
+.explications {
+  font-size: 0.7em;
+}
+
+.sliding-tiles table td {
+  border: 1px solid;
+  padding: 0.2em 0.5em 0.2em 0.5em;
+  text-align: center;
+}
+
+.sliding-tiles table tbody tr:last-child th,
+.sliding-tiles table tbody tr:last-child td {
+  border-bottom: 1px solid;
+}
+
+.sliding-tiles p {
+  color: #ed1450;
+  font-size: 0.7em;
+}
+
+span.code-font {
+  font-family: "Courier new";
+  font-size: 0.8em;
+}
+
+.reveal pre {
+  display: inline-block;
+  width: auto;
+}
+
+.reveal pre code {
+  padding: 5px 20px;
+}
+
+.reveal blockquote {
+  color: rgb(60, 60, 60);
+  border-left: 3px solid rgb(120, 120, 120);
+  box-shadow: none;
+  text-align: justify;
+  padding-left: 30px;
+}
+
+.reveal .logo25 {
+  max-width: 25%;
+}
+
+.reveal .logo50 {
+  max-width: 50%;
+}
+
+.reveal .logo75 {
+  max-width: 75%;
+}
+
+#table_entrypoint-cmd table {
+  font-size: 0.5em;
+}
+
+.imgPosition {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+#redCross {
+  margin-top: -150px;   /* Half the height */
+  margin-left: -150px;  /* Half the width */
+}
+
+#jsonAPI {
+  margin-top: -150px;   /* Half the height */
+  margin-left: -340px;  /* Half the width */
+}
+
+#searchEmpty {
+  height: 400px;
+}
+
+#searchGetForObjectGoogle {
+/*  margin-top: -150px;*/   /* Half the height */
+  margin-left: -480px;  /* Half the width */
+}
+
+#searchGetForObject {
+  margin-top: -150px;   /* Half the height */
+  margin-left: -480px;  /* Half the width */
+}
+
+#searchObjectMapperGoogle {
+  margin-top: -150px;   /* Half the height */
+  margin-left: -200px;  /* Half the width */
+}
+
+#searchObjectMapperJavadoc {
+  margin-top: 0;   /* Half the height */
+  margin-left: 0;  /* Half the width */
+}
+
+#searchJsonToObject {
+  margin-top: 60px;     /* Half the height */
+  margin-left: -500px;   /* Half the width */
+}
+
+#searchRequestToObject {
+  margin-top: 0;        /* Half the height */
+  margin-left: -80px;   /* Half the width */
+}
+
+#searchResult {
+  margin-top: 0;        /* Half the height */
+  margin-left: -80px;   /* Half the width */
+}
+
+#satisfactionCodeRevue1 {
+  margin-top: -100px;   /* Half the height */
+  margin-left: -80px;   /* Half the width */
+}
+
+#satisfactionCodeRevue2 {
+  margin-top: 100px;    /* Half the height */
+  margin-left: -80px;   /* Half the width */
+}
+
+#merci {
+  width: 500px;
+  margin-top: -100px;     /* Half the height */
+  margin-left: -250px;   /* Half the width */
+}
+
+.bordering {
+  -webkit-box-shadow: 5px 7px 10px 2px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 5px 7px 10px 2px rgba(0, 0, 0, 0.4);
+  box-shadow: 5px 7px 10px 2px rgba(0, 0, 0, 0.4);
+  /* border: 1px solid; */
+}
+
+.labelFile {
+  font-size: 30px;
+  margin-bottom: 5px;
+}
+
+.codeLocation {
+  font-style: italic;
+  font-size: 0.7em;
+  margin-bottom: 5px;
+}
+
+.legend {
+  font-style: italic;
+  font-size: 30px;
+}

@@ -1,0 +1,70 @@
+<!-- ALL SLIDES OF A CHAPTER GO HERE -->
+<!-- Each section element contains an individual slide -->
+
+<!-- 
+  To add a resource :
+  1- add it in slideshow/resources folder depending on the file type
+  2- modify src attributes so that the link points to the right folder
+-->
+<section data-timing="8">
+  <h1>Recherche</h1>
+  <aside class="notes">
+    Je vais vous présenter, une de mes recherches, sur un sujet la déserialisation,
+    que j'ai utilisé pour récupérer le retour des API externes.
+  </aside>
+</section>
+<section data-timing="60">
+  <h2>Déserialisation d'un JSON</h2>
+  <div id="searchEmpty"><span></span></div>
+  <!-- <img class="logo75 imgPosition" id="searchGetForObject" src="./slideshow/resources/images/search-readTree-javadoc.png" alt="The Movie Database API"> -->
+  <!-- <img class="logo75 imgPosition fragment" id="searchJsonToObject" src="./slideshow/resources/images/search-jsonToObject.png" /> -->
+  <img class="logo75 imgPosition fragment" id="searchGetForObjectGoogle"
+    src="./slideshow/resources/images/search-jsonToObject-Google.png" alt="The Movie Database API">
+  <img class="logo75 imgPosition fragment" id="searchGetForObject"
+    src="./slideshow/resources/images/search-jsonToObject.png" alt="The Movie Database API">
+  <img class="logo75 imgPosition fragment" id="searchObjectMapperGoogle"
+    src="./slideshow/resources/images/search-objectMapper-Google.png" alt="The Movie Database API">
+  <img class="logo75 imgPosition fragment" id="searchObjectMapperJavadoc"
+    src="./slideshow/resources/images/search-objectMapper-javadoc.png" alt="The Movie Database API">
+  <img class="logo75 imgPosition fragment" id="searchJsonToObject"
+    src="./slideshow/resources/images/search-readTree-javadoc.png" />
+  <img class="logo75 imgPosition fragment" id="searchResult"
+    src="./slideshow/resources/images/search-result-code.png" />
+
+  <aside class="notes">
+    Pour déserialiser le résultat d'une requête sur les API externes, j'ai eu besoin de vérifier
+    la syntaxe et quel méthode je pouvais utiliser. (O)<br>
+    J'ai donc rechercher en 1er sur Google, avec les termes "<strong>java deserialize json to object</strong>".<br>
+    Ce qui m'a conduit au site de baeldung (O)<br>
+    Le code me paraissant un peu léger, j'ai voulu vérifier sur la javadoc l'implémentation
+    de la class objectMapper. <br>
+    Retour sur Google, avec les termes "<strong>Javadoc objectMapper</strong>" (O)<br>
+    Je clique sur le lien vers l'<strong>ObjectMapper</strong> qui me dirige sur la Javadoc de la class
+    ObjectMapper. (O)<br>
+    Dans cette page, en lisant cette doc,
+    je trouve l'utilisation de readTree (O) <br>
+    qui me renvoie un object JsonNode (qui est une représentation de l'arbre JSON)<br>
+    Ce qui m'a permis de rédiger le code suivant (O)<br>
+    Voilà le cheminement de ma recherche (O)<br>
+
+    <br>
+    <ul>
+      <li><a href="https://www.baeldung.com/jackson-object-mapper-tutorial">Deserialisation de JSON</a></li>
+      <li><a
+          href="https://fasterxml.github.io/jackson-databind/javadoc/2.7/com/fasterxml/jackson/databind/ObjectMapper.html#readTree(java.lang.String)">readTree
+          JavaDoc</a></li>
+    </ul>
+  </aside>
+</section>
+
+<!-- <section>
+  <h2>API : Récupérer un objet</h2>
+  <div id="searchEmpty"><span></span></div>
+  <img class="logo75 imgPosition" id="searchGetForObject" src="./slideshow/resources/images/search-getForObject-javadoc.png" alt="The Movie Database API">
+  <img class="logo75 imgPosition fragment" id="searchRequestToObject" src="./slideshow/resources/images/search-requestToObject.png" />
+  
+  <aside class="notes">
+
+    [Récupération d'objet via une requête](https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/client/RestTemplate.html#getForObject-java.lang.String-java.lang.Class-java.lang.Object...-)
+  </aside>
+</section> -->
